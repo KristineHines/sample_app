@@ -49,7 +49,7 @@ end
 # Note: You can modify files loaded *from* the Spork.each_run block without
 # restarting the spork server.  However, this file itself will not be reloaded,
 # so if you change any of the code inside the each_run block, you still need to
-# restart the server.  In general, if you have non-trivial code in this file,
+# restart the server.  In general, if bunyou have non-trivial code in this file,
 # it's advisable to move it into a separate file so you can easily edit it
 # without restarting spork.  (For example, with RSpec, you could move
 # non-trivial code into a file spec/support/my_helper.rb, making sure that the
@@ -75,6 +75,7 @@ require 'rspec/autorun'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
+  config.include Rails.application.routes.url_helpers
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
