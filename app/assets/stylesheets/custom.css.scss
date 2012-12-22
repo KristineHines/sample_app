@@ -162,6 +162,7 @@ input {
 
 #error_explanation {
   color: #f00;
+  border-color: #f00;
   ul {
     list-style: none;
     margin: 0 0 18px 0;
@@ -172,7 +173,6 @@ input {
   @extend .control-group;
   @extend .error;
  }
-
 
 	
 }
