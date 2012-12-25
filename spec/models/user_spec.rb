@@ -32,7 +32,7 @@ require 'spec_helper'
     it { should be_valid }
     it { should_not be_admin}
 
-    describe "with admoin attribute set to 'true'" do
+    describe "with admin attribute set to 'true'" do
       before do
         @user.save!
         @user.toggle!(:admin)
