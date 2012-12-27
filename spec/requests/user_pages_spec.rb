@@ -34,6 +34,7 @@ describe "User pages" do
 
       it { should_not have_link('delete') }
 
+
       describe "as an admin user" do
         let(:admin) { FactoryGirl.create(:admin) }
         before do
