@@ -2,6 +2,16 @@
 
   <%= render 'static_pages/if_signed_in' %>
 
+  	<section>
+        <%= render 'shared/user_info' %>
+    </section>
+     <section>
+      <%= render 'shared/stats' %>
+    </section>
+    <section>
+      <%= render 'shared/micropost_form' %>
+    </section>
+    
 <% else %>
 
   <%= render 'static_pages/new_user' %>

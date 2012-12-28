@@ -64,6 +64,18 @@ describe "Authentication" do
         end
       end
 
+      describe "in the Relationships controller" do
+        describe "submitting to the create action" do
+          before { post relationships_path }
+          specify { response.should redirect_to(signin_path) }
+        end
+
+        describe "submitting to the destroy action" do
+          before { delete relationship_path(1) }
+          specify { response.should redirect_to(signin_path) }          
+        end
+      end
+
       it {should_not have_link('Profile', href: user_path(user)) }
       it {should_not have_link('Settings', href: edit_user_path(user)) }
 
@@ -99,6 +111,16 @@ describe "Authentication" do
 
       describe "in the Users controller" do
 
+        describe "visiting the following page" do
+          before { visit following_user_path(user) }
+          it { should have_selector('title', text: 'Sign in') }
+        end
+
+        describe "visiting the followers page" do
+          before { visit followers_user_path(user) }
+          it { should have_selector('title', text: 'Sign in') }
+        end
+
         describe "visiting the edit page" do
           before { visit edit_user_path(user) }
           it { should have_selector('title', text: 'Sign in') }
@@ -126,21 +148,21 @@ describe "Authentication" do
             specify { response.should redirect_to(root_path) }        
           end
         end
+      end
 
-        describe "as wrong user" do
-          let(:user) { FactoryGirl.create(:user) }
-          let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
-          before { sign_in user }
+      describe "as wrong user" do
+        let(:user) { FactoryGirl.create(:user) }
+        let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
+        before { sign_in user }
 
-          describe "visiting Users#edit page" do
-            before { visit edit_user_path(wrong_user) }
-            it { should_not have_selector('title', text: full_title('Edit user')) }
-          end
+        describe "visiting Users#edit page" do
+          before { visit edit_user_path(wrong_user) }
+          it { should_not have_selector('title', text: full_title('Edit user')) }
+        end
 
-          describe "submitting a PUT request to the Users#update action" do
-            before { put user_path(wrong_user) }
-            specify { response.should redirect_to(root_path) }
-          end
+        describe "submitting a PUT request to the Users#update action" do
+          before { put user_path(wrong_user) }
+          specify { response.should redirect_to(root_path) }
         end
       end
     end
